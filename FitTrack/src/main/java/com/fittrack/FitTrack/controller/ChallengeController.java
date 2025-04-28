@@ -1,6 +1,7 @@
 package com.fittrack.FitTrack.controller;
 
 import com.fittrack.FitTrack.exception.ChallengeException;
+import com.fittrack.FitTrack.exception.UserException;
 import com.fittrack.FitTrack.models.Challenge;
 import com.fittrack.FitTrack.service.ChallengeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +34,7 @@ public class ChallengeController {
             @ApiResponse(responseCode = "400", description = "Invalid Challenge details")
     })
     @PostMapping
-    public ResponseEntity<Challenge> createChallenge(@RequestBody Challenge challenge) throws ChallengeException {
+    public ResponseEntity<Challenge> createChallenge(@RequestBody Challenge challenge) throws ChallengeException, UserException {
         Challenge createdChallenge = challengeService.createChallenge(challenge);
         return new ResponseEntity<>(createdChallenge, HttpStatusCode.valueOf(200));
     }

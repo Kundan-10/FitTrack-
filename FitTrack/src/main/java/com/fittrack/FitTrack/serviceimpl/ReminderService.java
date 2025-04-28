@@ -1,6 +1,5 @@
 package com.fittrack.FitTrack.serviceimpl;
 
-import com.fittrack.FitTrack.enums.NotificationStatus;
 import com.fittrack.FitTrack.models.Notification;
 import com.fittrack.FitTrack.models.User;
 import com.fittrack.FitTrack.repository.NotificationRepository;
@@ -12,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,9 +32,9 @@ public class ReminderService {
         List<User> users = userRepository.findAll();
 
         for (User user : users) {
-            boolean isActiveRecently = workoutRepository.existsByUserIdAndWorkoutDateAfter(
+            boolean isActiveRecently = workoutRepository.existsByUserIdAndTimestampAfter(
                     user.getId(),
-                    LocalDate.now().minusDays(3)
+                    LocalDateTime.now().minusDays(3)
             );
 
             if (!isActiveRecently) {

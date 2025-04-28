@@ -29,6 +29,12 @@ public class GlobalException {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NotificationException.class)
+    public ResponseEntity<Error> notificationException(NotificationException ex, WebRequest web){
+        Error error = new Error(LocalDateTime.now(),ex.getMessage(), web.getDescription(false));
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Error> validatedException(MethodArgumentNotValidException validEx, WebRequest web){
         Error error = new Error(LocalDateTime.now(),validEx.getMessage(),validEx.getBindingResult().getFieldError().getDefaultMessage());

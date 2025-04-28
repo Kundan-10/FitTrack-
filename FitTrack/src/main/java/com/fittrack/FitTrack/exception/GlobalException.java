@@ -24,7 +24,7 @@ public class GlobalException {
     }
 
     @ExceptionHandler(ChallengeException.class)
-    public ResponseEntity<Error> userException(ChallengeException ex, WebRequest web){
+    public ResponseEntity<Error> challengeException(ChallengeException ex, WebRequest web){
         Error error = new Error(LocalDateTime.now(),ex.getMessage(), web.getDescription(false));
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
